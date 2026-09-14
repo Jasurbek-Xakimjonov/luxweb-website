@@ -48,20 +48,28 @@ export function InstagramSection() {
                 rel="noopener noreferrer"
                 className="group p-6 rounded-xl bg-[#0d0d12] border border-white/[0.08] hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between aspect-[4/5] overflow-hidden relative"
               >
-                {/* Abstract luxury geometric design visual inside */}
+                {/* High quality realistic image filling the card */}
+                <img
+                  src={item.image}
+                  alt={localizedItem.title}
+                  referrerPolicy="no-referrer"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+
+                {/* Subtle dark luxury gradient overlay to ensure contrast & readability of badges and text */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-80 group-hover:opacity-100 transition-opacity duration-500`}
+                  className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/60 pointer-events-none"
                 />
 
                 {/* Minimal grid lines within post card */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
 
                 {/* Card top */}
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded bg-black/60 border border-white/10 text-[#E5C388]">
+                  <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded bg-black/60 backdrop-blur-md border border-white/15 text-[#E5C388]">
                     {localizedItem.tag}
                   </span>
-                  <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-400">
+                  <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-300 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10">
                     <Heart className="w-3 h-3 text-red-400/80 fill-red-400/30" />
                     <span>{item.likes}</span>
                   </div>

@@ -1,4 +1,8 @@
 import { ProjectItem, ServiceItem, PricingPlan } from '../types';
+import beautyUiImg from '../assets/images/beauty_ui_system_1789406160623.jpg';
+import automotiveImg from '../assets/images/automotive_showroom_1789406174970.jpg';
+import restaurantImg from '../assets/images/restaurant_interior_1789406188348.jpg';
+import brandArchetypeImg from '../assets/images/brand_archetype_1789406202516.jpg';
 
 export const LUXWEB_CONFIG = {
   brandName: 'LUXWEB',
@@ -349,6 +353,7 @@ export const INSTAGRAM_HIGHLIGHTS = [
     title: 'Minimal Beauty UI System',
     tag: 'Web Design',
     gradient: 'from-neutral-900 via-stone-900 to-black',
+    image: beautyUiImg,
     likes: '1.2k',
     caption: 'Atmospheric typography and fluid spacing for contemporary beauty atelier.'
   },
@@ -357,6 +362,7 @@ export const INSTAGRAM_HIGHLIGHTS = [
     title: 'Dark Automotive Showroom',
     tag: 'Motion Lab',
     gradient: 'from-zinc-950 via-neutral-900 to-black',
+    image: automotiveImg,
     likes: '940',
     caption: 'Micro-interactions designed for high-performance supercar inventory.'
   },
@@ -365,6 +371,7 @@ export const INSTAGRAM_HIGHLIGHTS = [
     title: 'Culinary Menu & Booking Flow',
     tag: 'Case Study',
     gradient: 'from-stone-950 via-neutral-900 to-zinc-950',
+    image: restaurantImg,
     likes: '1.5k',
     caption: 'Zero-friction table reservations with candlelit ambiance lighting.'
   },
@@ -373,6 +380,7 @@ export const INSTAGRAM_HIGHLIGHTS = [
     title: 'Brand Archetype: LUXWEB 2026',
     tag: 'Identity',
     gradient: 'from-neutral-900 via-black to-stone-950',
+    image: brandArchetypeImg,
     likes: '2.1k',
     caption: 'Deep matte black, editorial typography, and disciplined champagne gold accents.'
   }
