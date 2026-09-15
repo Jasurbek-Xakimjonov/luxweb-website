@@ -1,6 +1,6 @@
 {
   "name": "LUXWEB — Premium Web Design Studio",
-  "description": "LUXWEB creates premium websites for modern businesses in Uzbekistan and worldwide.",
+  "description": "Premium web saytlar va zamonaviy raqamli yechimlar. LUXWEB O‘zbekistondagi bizneslar uchun professional, tezkor va mobil qurilmalarga mos web saytlar yaratadi.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

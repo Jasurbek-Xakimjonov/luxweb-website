@@ -8,6 +8,7 @@ import { WhyUs } from './components/WhyUs';
 import { Process } from './components/Process';
 import { About } from './components/About';
 import { Pricing } from './components/Pricing';
+import { FAQ } from './components/FAQ';
 import { CTA } from './components/CTA';
 import { Contact } from './components/Contact';
 import { InstagramSection } from './components/InstagramSection';
@@ -110,11 +111,13 @@ export default function App() {
 
         <WhyUs />
 
-        <Process />
+        <Process onStartProject={() => handleOpenProjectForm()} />
 
         <About />
 
         <Pricing onSelectPlan={handleSelectPlan} />
+
+        <FAQ />
 
         <CTA onStartProject={() => handleOpenProjectForm()} />
 

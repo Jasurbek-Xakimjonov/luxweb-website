@@ -1,13 +1,33 @@
-import { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ArrowRight, MessageSquare, Palette, Code2, Rocket } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export function Process() {
+interface ProcessProps {
+  onStartProject?: () => void;
+}
+
+export function Process({ onStartProject }: ProcessProps) {
   const { t } = useLanguage();
-  const [activeStep, setActiveStep] = useState(0);
+
+  const handleStartProject = () => {
+    if (onStartProject) {
+      onStartProject();
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const stepIcons = [
+    <MessageSquare key="1" className="w-5 h-5 text-[#E5C388]" />,
+    <Palette key="2" className="w-5 h-5 text-[#E5C388]" />,
+    <Code2 key="3" className="w-5 h-5 text-[#E5C388]" />,
+    <Rocket key="4" className="w-5 h-5 text-[#E5C388]" />,
+  ];
 
   return (
-    <section id="process" className="relative py-28 sm:py-36 bg-[#080809] border-t border-white/[0.06]">
+    <section id="process" className="relative py-24 sm:py-32 bg-[#080809] border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20">
@@ -19,87 +39,75 @@ export function Process() {
           </div>
 
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[1.08]">
-            {t.process.titlePart1} <br className="hidden sm:inline" />
-            <span className="text-zinc-400">{t.process.titlePart2}</span>
+            {t.process.titlePart1} <span className="text-zinc-400">{t.process.titlePart2}</span>
           </h2>
+
+          <p className="mt-4 text-base sm:text-lg text-zinc-400 font-light max-w-2xl leading-relaxed">
+            {t.process.subtitle}
+          </p>
         </div>
 
-        {/* Visual Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {t.process.steps.map((step, idx) => {
-            const isCurrent = activeStep === idx;
-            return (
+        {/* Process Timeline */}
+        <div className="relative">
+          {/* Subtle champagne-gold horizontal connection line on desktop */}
+          <div 
+            className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/35 to-transparent pointer-events-none z-0" 
+            aria-hidden="true"
+          />
+
+          {/* Desktop: Horizontal 4-step layout / Mobile: Vertical timeline */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 relative z-10">
+            {t.process.steps.map((step, idx) => (
               <div
                 key={step.step}
                 id={`process-step-${step.step}`}
-                onClick={() => setActiveStep(idx)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setActiveStep(idx);
-                  }
-                }}
-                className={`group p-8 rounded-2xl border transition-all duration-300 flex flex-col justify-between cursor-pointer ${
-                  isCurrent
-                    ? 'bg-[#121218] border-[#D4AF37]/80 shadow-xl shadow-black/50'
-                    : 'bg-[#0d0d12] border-white/[0.08] hover:border-white/20 hover:bg-[#101015]'
-                }`}
+                className="group p-8 rounded-2xl bg-[#0c0c10] border border-white/[0.08] hover:border-[#D4AF37]/45 hover:-translate-y-1 transition-all duration-300 relative flex flex-col justify-between"
               >
                 <div>
-                  {/* Step Number with gold indicator */}
-                  <div className="flex items-center justify-between mb-8">
-                    <span
-                      className={`font-mono text-2xl font-bold tracking-tight transition-colors ${
-                        isCurrent ? 'text-[#D4AF37]' : 'text-zinc-500 group-hover:text-zinc-300'
-                      }`}
-                    >
+                  {/* Top Bar: Large Elegant Number + Icon */}
+                  <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/[0.05]">
+                    <span className="font-display text-4xl sm:text-5xl font-light text-[#D4AF37] tracking-tight select-none">
                       {step.step}
                     </span>
-                    <span
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        isCurrent ? 'bg-[#D4AF37] scale-125' : 'bg-white/20'
-                      }`}
-                    />
+                    <div className="w-11 h-11 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center group-hover:border-[#D4AF37]/30 transition-colors">
+                      {stepIcons[idx]}
+                    </div>
                   </div>
 
                   {/* Step Title */}
-                  <h3 className="font-display text-xl font-bold uppercase tracking-tight text-white mb-3">
+                  <h3 className="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-white mb-3 group-hover:text-white transition-colors">
                     {step.title}
                   </h3>
 
-                  {/* Description from prompt */}
-                  <p className="text-sm text-zinc-400 font-light leading-relaxed mb-6">
+                  {/* Step Description */}
+                  <p className="text-sm text-zinc-400 font-light leading-relaxed">
                     {step.description}
                   </p>
                 </div>
 
-                {/* Sub-steps checklist */}
-                <div className="border-t border-white/[0.06] pt-5 mt-auto space-y-2">
-                  {step.details.slice(0, 2).map((detail, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2 text-xs text-zinc-400 leading-snug">
-                      <ChevronRight className="w-3.5 h-3.5 text-[#D4AF37] shrink-0 mt-0.5" />
-                      <span>{detail}</span>
-                    </div>
-                  ))}
+                {/* Step indicator dot at bottom */}
+                <div className="mt-8 pt-4 border-t border-white/[0.04] flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                  <span className="uppercase tracking-wider">Bosqich {idx + 1}/4</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40 group-hover:bg-[#D4AF37] transition-colors" />
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
-        {/* Timeline Bottom Guarantee Note */}
-        <div className="mt-14 p-6 rounded-xl bg-[#0d0d12] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-zinc-300">
-            <span className="text-[#E5C388] font-semibold mr-2 font-mono">{t.process.estimatedTimelineLabel}:</span>
-            {t.process.estimatedTimelineText}
-          </div>
-          <div className="text-xs font-mono text-zinc-500">
-            {t.process.timelineTag}
-          </div>
+        {/* CTA: Smoothly scrolls to the existing contact form */}
+        <div className="mt-14 sm:mt-16 text-center">
+          <button
+            id="process-start-project-btn"
+            onClick={handleStartProject}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white/5 hover:bg-[#D4AF37] text-white hover:text-black border border-[#D4AF37]/40 hover:border-[#D4AF37] font-display text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-lg shadow-black/40 hover:shadow-[#D4AF37]/20 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+          >
+            <span>{t.process.ctaButton}</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
       </div>
     </section>
   );
 }
+

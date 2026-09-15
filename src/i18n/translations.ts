@@ -8,6 +8,7 @@ export interface TranslationData {
     process: string;
     about: string;
     pricing: string;
+    faq: string;
     contact: string;
     startProject: string;
     mobileMenuTitle: string;
@@ -102,28 +103,24 @@ export interface TranslationData {
     sectionTag: string;
     titlePart1: string;
     titlePart2: string;
+    subtitle: string;
     features: {
+      number: string;
       title: string;
       description: string;
-      detail: string;
     }[];
-    guaranteeText: string;
-    wcagTag: string;
-    zeroSlopTag: string;
   };
   process: {
     sectionTag: string;
     titlePart1: string;
     titlePart2: string;
+    subtitle: string;
+    ctaButton: string;
     steps: {
       step: string;
       title: string;
       description: string;
-      details: string[];
     }[];
-    estimatedTimelineLabel: string;
-    estimatedTimelineText: string;
-    timelineTag: string;
   };
   about: {
     sectionTag: string;
@@ -144,6 +141,7 @@ export interface TranslationData {
     sectionTag: string;
     titlePart1: string;
     titlePart2: string;
+    subtitle: string;
     currencyLabel: string;
     mostPopularBadge: string;
     includesLabel: string;
@@ -151,12 +149,24 @@ export interface TranslationData {
     plans: {
       id: string;
       name: string;
+      priceDisplay: string;
       priceUsd: number;
       priceUzs: string;
       description: string;
       turnaroundTime: string;
       features: string[];
       ctaText: string;
+    }[];
+  };
+  faq: {
+    sectionTag: string;
+    titlePart1: string;
+    titlePart2: string;
+    subtitle: string;
+    items: {
+      id: string;
+      question: string;
+      answer: string;
     }[];
   };
   cta: {
@@ -247,6 +257,7 @@ export const translations: Record<Language, TranslationData> = {
       process: 'Jarayon',
       about: 'Biz haqimizda',
       pricing: 'Tariflar',
+      faq: 'FAQ',
       contact: 'Aloqa',
       startProject: 'Loyihani boshlash',
       mobileMenuTitle: 'Sayt Menyusi',
@@ -488,84 +499,61 @@ export const translations: Record<Language, TranslationData> = {
       },
     },
     whyUs: {
-      sectionTag: 'NEGA LUXWEB',
-      titlePart1: 'DIZAYN FAQAT TASHQI',
-      titlePart2: 'KO‘RINISHDAN IBORAT EMAS.',
+      sectionTag: 'NEGA AYNAN BIZ',
+      titlePart1: 'NEGA AYNAN',
+      titlePart2: 'LUXWEB?',
+      subtitle: 'Biz shunchaki sayt yaratmaymiz — biznesingiz uchun kuchli raqamli imidj yaratamiz.',
       features: [
         {
-          title: 'PREMIAL DIZAYN',
-          description: 'Har bir interfeys kuchli birinchi taassurot qoldirish uchun puxta ishlab chiqiladi.',
-          detail: 'Biz tayyor shablonlarni qat’iyan rad etamiz. Har bir chiziq, tipografik nisbat va nozik tilla aksentlar brendingizni o‘z bozorida so‘zsiz yetakchi sifatida ko‘rsatish uchun tanlanadi.',
+          number: '01',
+          title: 'PREMIUM DESIGN',
+          description: 'Har bir loyiha biznesingizga mos, zamonaviy va professional dizayn asosida yaratiladi.',
         },
         {
-          title: 'YUQORI TEZLIK',
-          description: 'Tezkor ishlash va silliq interaksiyalar uchun optimallashtirilgan saytlar.',
-          detail: 'Zamonaviy React va yengil toza kodda yig‘ilgan. Hech qanday ortiqcha og‘ir plaginlarsiz. Google Lighthouse tizimida 95+ ball kafolatlanadi.',
+          number: '02',
+          title: 'MOBILE FIRST',
+          description: 'Saytingiz telefon, planshet va kompyuterda birdek chiroyli va qulay ishlaydi.',
         },
         {
-          title: 'MOBIL QURILMALAR UCHUN',
-          description: 'Barcha platformalar smartfon, planshet va kompyuterlarda birdek mukammal ishlaydi.',
-          detail: 'Mijozlaringizning 85% dan ortig‘i saytingizga smartfondan kiradi. Biz qulay barmoq harakatlari, tiniq shriftlar va ortiqcha siljishlarsiz benuqson tajribani ta’minlaymiz.',
+          number: '03',
+          title: 'REAL LEADS',
+          description: 'Kontakt formasi va Telegram integratsiyasi orqali saytingiz real mijozlardan murojaat qabul qiladi.',
         },
         {
-          title: 'BIZNESGA YO‘NALTIRILGAN',
-          description: 'Dizayn qarorlari biznesingizga mijozlarni jalb qilish va daromadni oshirish uchun qabul qilinadi.',
-          detail: 'Sayt nafaqat chiroyli bo‘lishi, balki pul keltirishi kerak. Biz strategik harakatga chaqiruvchi tugmalar va Telegram/WhatsApp aloqa tizimlarini loyihaga uzviy kiritamiz.',
+          number: '04',
+          title: 'PERFORMANCE',
+          description: 'Tez yuklanadigan, SEO uchun optimallashtirilgan va foydalanuvchi tajribasiga e’tibor berilgan saytlar.',
         },
       ],
-      guaranteeText: 'Kafolatimiz: Har bir veb-sayt ishga tushirishdan oldin tezlik, mobil moslashuv va konversiya bo‘yicha 40+ banddan iborat auditdan o‘tadi.',
-      wcagTag: 'WCAG 2.1 AA Mos',
-      zeroSlopTag: 'Shablonsiz eksklyuziv ish',
     },
     process: {
-      sectionTag: 'ISH JARAYONIMIZ',
-      titlePart1: 'G‘OYADAN TO',
-      titlePart2: 'ISHGA TUSHIRISHGACHA.',
+      sectionTag: 'BOSQICHLAR VA JARAYON',
+      titlePart1: 'BIZ QANDAY',
+      titlePart2: 'ISHLAYMIZ?',
+      subtitle: 'Oddiy g‘oyadan tayyor professional web-saytgacha — 4 bosqich.',
+      ctaButton: 'LOYIHANI BOSHLASH',
       steps: [
         {
           step: '01',
-          title: 'TADQIQOT',
-          description: 'Biznesingiz, auditoriyangiz va maqsadlaringizni chuqur o‘rganamiz.',
-          details: [
-            'O‘zbekiston va xalqaro bozordagi raqobatchilarni tahlil qilish bo‘yicha batafsil konsultatsiya',
-            'Sizning to‘lovga qodir ideal mijozingiz profilini va konversiya maqsadlarini aniqlash',
-            'Brend ovozi, estetik ohangi va zarur funksiyalar rejasini tasdiqlash',
-          ],
+          title: 'SUHBAT',
+          description: 'Avval biznesingiz, maqsadlaringiz va kerakli funksiyalarni tushunib olamiz.',
         },
         {
           step: '02',
           title: 'DIZAYN',
-          description: 'Vizual yo‘nalish va foydalanuvchi tajribasini (UX) quramiz.',
-          details: [
-            'Aniq tipografik ierarxiyaga ega arxitekturaviy wireframe-eskizlar',
-            'Luks estetika va nozik oltin aksentlarga ega yuqori sifatli interaktiv vizual yo‘nalish',
-            'Kod yozishdan oldin dizaynni ko‘rib chiqish va birgalikda mukammallashtirish',
-          ],
+          description: 'Brendingizga mos premium UI/UX konsepsiyasini ishlab chiqamiz.',
         },
         {
           step: '03',
           title: 'ISHLAB CHIQISH',
-          description: 'Saytni eng ilg‘or zamonaviy texnologiyalar asosida yaratamiz.',
-          details: [
-            'Toza React, TypeScript va zamonaviy CSS yordamida ishonchli ishlab chiqish',
-            'Silliq 60 FPS animatsiyalar, mikro-interaksiyalar va soniyadan tez javob berish',
-            'Formalar, band qilish tizimlari va tezkor aloqa kanallarini uzluksiz ulash',
-          ],
+          description: 'Saytni zamonaviy texnologiyalar yordamida tez va sifatli ishlab chiqamiz.',
         },
         {
           step: '04',
           title: 'ISHGA TUSHIRISH',
-          description: 'Yakuniy tajribani to‘liq optimallashtiramiz, sinovdan o‘tkazamiz va ochamiz.',
-          details: [
-            'iPhone, Android, planshet va kompyuter ekranlarida ko‘p bosqichli sinov',
-            'To‘liq SEO-meta sozlamalari, yuklanish tezligi va xavfsizlik tekshiruvi',
-            'Domen ulash, serverga joylash va loyihani to‘liq topshirish',
-          ],
+          description: 'Saytni test qilamiz, optimallashtiramiz va internetga joylashtiramiz.',
         },
       ],
-      estimatedTimelineLabel: 'TAXMINIY MUDDAT:',
-      estimatedTimelineText: 'Tanlangan tarifga qarab studiyada tayyorlash muddati 1 dan 3 haftagacha davom etadi.',
-      timelineTag: 'Shaffof bosqichlar · Telegram orqali doimiy hisobot',
     },
     about: {
       sectionTag: 'LUXWEB HAQIDA',
@@ -584,67 +572,110 @@ export const translations: Record<Language, TranslationData> = {
       ],
     },
     pricing: {
-      sectionTag: 'INVESTITSIYA VA TARIFLAR',
-      titlePart1: 'ODDIY. SHAFFOF.',
-      titlePart2: 'PREMIAL.',
+      sectionTag: 'PAKETLAR VA TARIFLAR',
+      titlePart1: 'WEB SAYT',
+      titlePart2: 'PAKETLARI',
+      subtitle: 'Biznesingiz uchun mos yechimni tanlang.',
       currencyLabel: 'Valyuta:',
-      mostPopularBadge: 'ENG OMMABOP',
+      mostPopularBadge: 'TAVSIYA ETILADI',
       includesLabel: 'O‘z ichiga oladi:',
-      disclaimer: 'Yakuniy narx loyiha murakkabligi va o‘ziga xos talablariga bog‘liq.',
+      disclaimer: '* Ko‘rsatilgan narxlar boshlang‘ich narxlar hisoblanadi. Yakuniy qiymat loyiha talablari va funksional hajmiga ko‘ra belgilanadi.',
       plans: [
         {
           id: 'starter',
           name: 'STARTER',
-          priceUsd: 100,
-          priceUzs: '1,280,000',
-          description: 'Professional internet sahifasiga ega bo‘lishni istagan kichik bizneslar uchun.',
-          turnaroundTime: '5 — 7 kunda yetkazib berish',
+          priceDisplay: '$150 dan',
+          priceUsd: 150,
+          priceUzs: '1,920,000 dan',
+          description: 'Yangi bizneslar va kichik loyihalar uchun.',
+          turnaroundTime: '3–5 kun ichida tayyor',
           features: [
-            'Barcha qurilmalarga mos veb-sayt',
-            'Premial zamonaviy dizayn',
-            'Aloqa bo‘limi va formasi',
-            'Asosiy mikro-animatsiyalar',
-            'Smartfonlar uchun optimizatsiya',
-            'Domen va hostingni sozlash',
-            'Boshlang‘ich SEO-meta konfiguratsiyasi',
+            'Zamonaviy landing page',
+            'Responsive design',
+            'Telegram bilan bog‘lash',
+            'Kontakt formasi',
+            'Basic SEO',
+            '3–5 kun ichida tayyor',
           ],
-          ctaText: 'Starter tarifini tanlash',
+          ctaText: 'BUYURTMA BERISH',
         },
         {
           id: 'business',
           name: 'BUSINESS',
-          priceUsd: 200,
-          priceUzs: '2,560,000',
-          description: 'To‘liq va mustahkam professional sayt talab qiladigan bizneslar uchun.',
-          turnaroundTime: '10 — 14 kunda yetkazib berish',
+          priceDisplay: '$250 dan',
+          priceUsd: 250,
+          priceUzs: '3,200,000 dan',
+          description: 'Xizmatlarini professional ko‘rsatmoqchi bo‘lgan bizneslar uchun.',
+          turnaroundTime: '5–7 kun ichida tayyor',
           features: [
-            'Starter tarifidagi barcha imkoniyatlar',
-            'Bir nechta sahifalar / bo‘limlar',
-            'Kengaytirilgan silliq animatsiyalar',
-            'Galereya / portfolio namoyishi',
-            'Validatsiyali aloqa formasi',
-            'Telegram va WhatsApp orqali lid yo‘naltirish',
-            'Google qidiruviga indeksatsiya va SEO',
+            'Professional multi-section website',
+            'Responsive design',
+            'Telegram lead system',
+            'Premium UI/UX',
+            'SEO optimizatsiya',
+            'Google Maps / Instagram integratsiyasi',
+            '5–7 kun ichida tayyor',
           ],
-          ctaText: 'Business tarifini tanlash',
+          ctaText: 'BUYURTMA BERISH',
         },
         {
           id: 'premium',
           name: 'PREMIUM',
-          priceUsd: 350,
-          priceUzs: '4,480,000',
-          description: 'To‘liq individual va yuqori darajadagi raqamli tajribani xohlaydiganlar uchun.',
-          turnaroundTime: '14 — 21 kunda yetkazib berish',
+          priceDisplay: '$400 dan',
+          priceUsd: 400,
+          priceUzs: '5,120,000 dan',
+          description: 'Premium brendlar va kuchli online presence uchun.',
+          turnaroundTime: '7–14 kun ichida tayyor',
           features: [
-            'Business tarifidagi barcha imkoniyatlar',
-            'Murakkab interaksiyalar va mikro-detallar',
-            'Eksklyuziv maxsus UI/UX arxitekturasi',
-            'Premial animatsiyalar va silliq ochilishlar',
-            'Murakkab bo‘limlar (Lukbuk, Menyu, Spetsifikatsiya)',
-            'Interaktiv band qilish / bron integratsiyasi',
-            'Ustuvor texnik yordam va doimiy nazorat',
+            'Premium custom website',
+            'Advanced UI/UX',
+            'Advanced animations',
+            'Telegram lead system',
+            'SEO',
+            'Social media integrations',
+            'Custom sections',
+            'Performance optimization',
+            '7–14 kun ichida tayyor',
           ],
-          ctaText: 'Premium loyihani boshlash',
+          ctaText: 'PREMIUM LOYIHA BOSHLASH',
+        },
+      ],
+    },
+    faq: {
+      sectionTag: 'SAVOL VA JAVOBLAR',
+      titlePart1: 'KO‘P SO‘RALADIGAN',
+      titlePart2: 'SAVOLLAR',
+      subtitle: 'LUXWEB haqida eng muhim savollarga javoblar.',
+      items: [
+        {
+          id: 'faq-1',
+          question: 'Sayt yaratish qancha vaqt oladi?',
+          answer: 'Loyiha hajmiga qarab odatda 3–14 kun davom etadi. Aniq muddat loyiha boshida belgilanadi.',
+        },
+        {
+          id: 'faq-2',
+          question: 'Sayt narxi qancha?',
+          answer: 'Saytlar $150 dan boshlanadi. Yakuniy narx dizayn, funksiyalar va loyiha hajmiga qarab belgilanadi.',
+        },
+        {
+          id: 'faq-3',
+          question: 'Sayt telefonlarda ishlaydimi?',
+          answer: 'Ha. Barcha saytlar telefon, planshet va kompyuter ekranlariga moslashtiriladi.',
+        },
+        {
+          id: 'faq-4',
+          question: 'Saytga Telegram ulash mumkinmi?',
+          answer: 'Ha. Kontakt formasi orqali kelgan mijoz murojaatlarini Telegram orqali qabul qilish tizimini ulashimiz mumkin.',
+        },
+        {
+          id: 'faq-5',
+          question: 'Saytni keyinchalik o‘zgartirish mumkinmi?',
+          answer: 'Ha. Saytga yangi bo‘limlar, funksiyalar, matnlar va boshqa o‘zgarishlarni keyinchalik qo‘shish mumkin.',
+        },
+        {
+          id: 'faq-6',
+          question: 'LUXWEB bilan qanday bog‘lanaman?',
+          answer: 'Saytdagi kontakt formasini to‘ldiring. Murojaatingiz to‘g‘ridan-to‘g‘ri LUXWEB Telegram tizimiga yuboriladi.',
         },
       ],
     },
@@ -767,6 +798,7 @@ export const translations: Record<Language, TranslationData> = {
       process: 'Process',
       about: 'About',
       pricing: 'Pricing',
+      faq: 'FAQ',
       contact: 'Contact',
       startProject: 'Start a Project',
       mobileMenuTitle: 'Menu Navigation',
@@ -1009,83 +1041,60 @@ export const translations: Record<Language, TranslationData> = {
     },
     whyUs: {
       sectionTag: 'WHY LUXWEB',
-      titlePart1: 'DESIGN IS MORE',
-      titlePart2: 'THAN LOOKS.',
+      titlePart1: 'WHY',
+      titlePart2: 'LUXWEB?',
+      subtitle: 'We don’t just build websites — we create a commanding digital image for your business.',
       features: [
         {
+          number: '01',
           title: 'PREMIUM DESIGN',
-          description: 'Every interface is carefully designed to create a strong first impression.',
-          detail: 'We reject generic templates. Every line, typographic proportion, and subtle gold accent is tailored to position your brand as the undisputed leader in your market.',
+          description: 'Every project is custom-crafted to elevate your business with modern, professional aesthetics.',
         },
         {
-          title: 'FAST PERFORMANCE',
-          description: 'Optimized websites built for speed and smooth interaction.',
-          detail: 'Engineered on modern React and lightweight code. Zero bloated plugins, zero sluggish page delays. 95+ Google Lighthouse scores guaranteed.',
-        },
-        {
+          number: '02',
           title: 'MOBILE FIRST',
-          description: 'Every experience is designed to work beautifully on phones, tablets and desktops.',
-          detail: 'Over 85% of your local clients browse on smartphones. We ensure tactile touch ergonomics, crystal-clear typography, and zero horizontal scrolling.',
+          description: 'Flawless performance and elegant presentation across mobile, tablet, and desktop screens.',
         },
         {
-          title: 'BUSINESS FOCUSED',
-          description: 'Design decisions are made to help businesses attract customers and grow.',
-          detail: 'A website must generate revenue. We weave strategic call-to-actions, instant Telegram gateways, and clear value propositions throughout.',
+          number: '03',
+          title: 'REAL LEADS',
+          description: 'Direct customer inquiries channeled seamlessly into your contact form and Telegram.',
+        },
+        {
+          number: '04',
+          title: 'PERFORMANCE',
+          description: 'Fast loading times, built-in SEO optimization, and exceptional user experience.',
         },
       ],
-      guaranteeText: 'Our Guarantee: Every website undergoes 40+ point performance, mobile & conversion audits prior to deployment.',
-      wcagTag: 'WCAG 2.1 AA Compliant',
-      zeroSlopTag: 'Zero Slop Templates',
     },
     process: {
-      sectionTag: 'OUR PROCESS',
-      titlePart1: 'FROM IDEA',
-      titlePart2: 'TO LAUNCH.',
+      sectionTag: 'PROCESS & STAGES',
+      titlePart1: 'HOW WE',
+      titlePart2: 'WORK?',
+      subtitle: 'From simple concept to a finished professional website — 4 clear steps.',
+      ctaButton: 'START A PROJECT',
       steps: [
         {
           step: '01',
-          title: 'DISCOVER',
-          description: 'We understand your business, audience and goals.',
-          details: [
-            'In-depth consultation to analyze your competitive landscape in Uzbekistan and abroad',
-            'Identify your ideal high-paying client profile and conversion objectives',
-            'Establish brand voice, aesthetic tone, and feature roadmap',
-          ],
+          title: 'CONSULTATION',
+          description: 'First we understand your business, strategic goals, and required features.',
         },
         {
           step: '02',
           title: 'DESIGN',
-          description: 'We create the visual direction and user experience.',
-          details: [
-            'Bespoke architectural wireframes with deliberate typographic hierarchy',
-            'High-fidelity interactive visual direction with luxury aesthetic and subtle gold accents',
-            'Design review and rapid collaborative refinement before writing code',
-          ],
+          description: 'We develop a bespoke UI/UX concept aligned precisely with your brand identity.',
         },
         {
           step: '03',
-          title: 'BUILD',
-          description: 'We develop the website with modern technology.',
-          details: [
-            'Production-grade implementation using clean React, TypeScript, and modern CSS',
-            'Fluid 60 FPS animations, micro-interactions, and instant sub-second response',
-            'Seamless integration of forms, booking systems, and instant communication channels',
-          ],
+          title: 'DEVELOPMENT',
+          description: 'We build the website rapidly with uncompromising quality using modern tech.',
         },
         {
           step: '04',
           title: 'LAUNCH',
-          description: 'We optimize, test and launch the final experience.',
-          details: [
-            'Multi-device testing across iPhone, Android, tablets, and desktop displays',
-            'Comprehensive SEO meta setup, speed optimization, and security check',
-            'Domain connection, final deployment, and client handover with zero downtime',
-          ],
+          description: 'We rigorously test, optimize for peak speed, and deploy your site live.',
         },
       ],
-      estimatedTimelineLabel: 'ESTIMATED TIMELINE:',
-      estimatedTimelineText: 'Typical studio delivery ranges from 1 to 3 weeks depending on package tier.',
-      timelineTag: 'Transparent milestones · Direct Telegram updates',
     },
     about: {
       sectionTag: 'ABOUT LUXWEB',
@@ -1104,67 +1113,110 @@ export const translations: Record<Language, TranslationData> = {
       ],
     },
     pricing: {
-      sectionTag: 'INVESTMENT & TIERS',
-      titlePart1: 'SIMPLE. TRANSPARENT.',
-      titlePart2: 'PREMIUM.',
+      sectionTag: 'PACKAGES & TIERS',
+      titlePart1: 'WEBSITE',
+      titlePart2: 'PACKAGES',
+      subtitle: 'Choose the right solution for your business.',
       currencyLabel: 'Currency:',
-      mostPopularBadge: 'MOST POPULAR',
+      mostPopularBadge: 'RECOMMENDED',
       includesLabel: 'Includes:',
-      disclaimer: 'Final pricing depends on project complexity and requirements.',
+      disclaimer: '* Displayed prices are starting estimates. Final pricing depends on specific requirements and project scope.',
       plans: [
         {
           id: 'starter',
           name: 'STARTER',
-          priceUsd: 100,
-          priceUzs: '1,280,000',
-          description: 'For small businesses that need a professional online presence.',
-          turnaroundTime: '5 — 7 Days Delivery',
+          priceDisplay: 'From $150',
+          priceUsd: 150,
+          priceUzs: 'From 1,920,000',
+          description: 'For new businesses and small projects.',
+          turnaroundTime: 'Ready in 3–5 days',
           features: [
-            'Responsive website',
-            'Premium design',
-            'Contact section',
-            'Basic animations',
-            'Mobile optimization',
-            'Domain & Hosting Setup',
-            'Basic SEO Meta Configuration',
+            'Modern landing page',
+            'Responsive design',
+            'Telegram integration',
+            'Contact form',
+            'Basic SEO',
+            'Ready in 3–5 days',
           ],
-          ctaText: 'Choose Starter',
+          ctaText: 'ORDER NOW',
         },
         {
           id: 'business',
           name: 'BUSINESS',
-          priceUsd: 200,
-          priceUzs: '2,560,000',
-          description: 'For businesses that want a complete professional website.',
-          turnaroundTime: '10 — 14 Days Delivery',
+          priceDisplay: 'From $250',
+          priceUsd: 250,
+          priceUzs: 'From 3,200,000',
+          description: 'For businesses looking to present their services professionally.',
+          turnaroundTime: 'Ready in 5–7 days',
           features: [
-            'Everything in Starter',
-            'Multiple pages / sections',
-            'Advanced animations',
-            'Gallery / portfolio showcase',
-            'Contact form with validation',
-            'Telegram lead routing',
-            'SEO basics & Google indexing',
+            'Professional multi-section website',
+            'Responsive design',
+            'Telegram lead system',
+            'Premium UI/UX',
+            'SEO optimization',
+            'Google Maps / Instagram integration',
+            'Ready in 5–7 days',
           ],
-          ctaText: 'Choose Business',
+          ctaText: 'ORDER NOW',
         },
         {
           id: 'premium',
           name: 'PREMIUM',
-          priceUsd: 350,
-          priceUzs: '4,480,000',
-          description: 'For businesses that want a fully customized digital experience.',
-          turnaroundTime: '14 — 21 Days Delivery',
+          priceDisplay: 'From $400',
+          priceUsd: 400,
+          priceUzs: 'From 5,120,000',
+          description: 'For premium brands demanding a commanding online presence.',
+          turnaroundTime: 'Ready in 7–14 days',
           features: [
-            'Everything in Business',
-            'Advanced interactions & micro-details',
-            'Custom bespoke UI/UX architecture',
-            'Premium animations & smooth reveals',
-            'Advanced sections (Lookbook, Menu, Specs)',
-            'Interactive booking / reservation integration',
-            'Priority support & post-launch care',
+            'Premium custom website',
+            'Advanced UI/UX',
+            'Advanced animations',
+            'Telegram lead system',
+            'SEO',
+            'Social media integrations',
+            'Custom sections',
+            'Performance optimization',
+            'Ready in 7–14 days',
           ],
-          ctaText: 'Start Premium Project',
+          ctaText: 'START PREMIUM PROJECT',
+        },
+      ],
+    },
+    faq: {
+      sectionTag: 'FREQUENTLY ASKED QUESTIONS',
+      titlePart1: 'COMMON',
+      titlePart2: 'QUESTIONS',
+      subtitle: 'Key answers about working with LUXWEB.',
+      items: [
+        {
+          id: 'faq-1',
+          question: 'How long does website development take?',
+          answer: 'Depending on project scope, it typically takes 3–14 days. An exact timeline is agreed upon at the start.',
+        },
+        {
+          id: 'faq-2',
+          question: 'How much does a website cost?',
+          answer: 'Websites start from $150. The final cost depends on design fidelity, required functionality, and scope.',
+        },
+        {
+          id: 'faq-3',
+          question: 'Does the website work on mobile devices?',
+          answer: 'Yes. Every website is custom optimized across smartphones, tablets, and desktop displays.',
+        },
+        {
+          id: 'faq-4',
+          question: 'Can you integrate Telegram notifications?',
+          answer: 'Yes. Inquiries submitted through your contact form are routed instantly to your Telegram channel or bot.',
+        },
+        {
+          id: 'faq-5',
+          question: 'Can the website be updated or expanded later?',
+          answer: 'Yes. You can seamlessly add new sections, features, copy, and visual assets as your business grows.',
+        },
+        {
+          id: 'faq-6',
+          question: 'How do I get in touch with LUXWEB?',
+          answer: 'Fill out our contact form on the website. Your request will be instantly dispatched to our Telegram team.',
         },
       ],
     },
@@ -1287,6 +1339,7 @@ export const translations: Record<Language, TranslationData> = {
       process: 'Процесс',
       about: 'О нас',
       pricing: 'Тарифы',
+      faq: 'FAQ',
       contact: 'Контакты',
       startProject: 'Начать проект',
       mobileMenuTitle: 'Меню навигации',
@@ -1529,83 +1582,60 @@ export const translations: Record<Language, TranslationData> = {
     },
     whyUs: {
       sectionTag: 'ПОЧЕМУ LUXWEB',
-      titlePart1: 'ДИЗАЙН — ЭТО НЕ ТОЛЬКО',
-      titlePart2: 'ВНЕШНИЙ ВИД.',
+      titlePart1: 'ПОЧЕМУ ИМЕННО',
+      titlePart2: 'LUXWEB?',
+      subtitle: 'Мы не просто создаем сайты — мы формируем сильный цифровой имидж для вашего бизнеса.',
       features: [
         {
-          title: 'ПРЕМИАЛЬНЫЙ ДИЗАЙН',
-          description: 'Каждый интерфейс тщательно разрабатывается для создания сильного первого впечатления.',
-          detail: 'Мы категорически не используем шаблонные решения. Каждая линия, пропорция шрифта и золотой акцент работают на то, чтобы ваш бренд стал бесспорным лидером рынка.',
+          number: '01',
+          title: 'PREMIUM DESIGN',
+          description: 'Каждый проект создается на базе индивидуального, современного и премиального дизайна.',
         },
         {
-          title: 'ВЫСОКАЯ СКОРОСТЬ',
-          description: 'Оптимизированные сайты, созданные для мгновенной загрузки и плавного отклика.',
-          detail: 'Собрано на чистом React без тяжелых плагинов и задержек. Гарантируем показатель 95+ в Google Lighthouse.',
-        },
-        {
+          number: '02',
           title: 'MOBILE FIRST',
-          description: 'Каждый интерфейс безупречно работает на смартфонах, планшетах и компьютерах.',
-          detail: 'Более 85% ваших клиентов просматривают сайт со смартфона. Мы гарантируем тактильную эргономику, кристальную типографику и полное отсутствие багов.',
+          description: 'Ваш сайт безупречно и быстро работает на смартфонах, планшетах и компьютерах.',
         },
         {
-          title: 'ФОКУС НА БИЗНЕС',
-          description: 'Все решения принимаются с целью привлечь клиентов и способствовать росту прибыли.',
-          detail: 'Сайт обязан приносить доход. Мы внедряем стратегические целевые действия, прямую связь через Telegram/WhatsApp и ясные преимущества продукта.',
+          number: '03',
+          title: 'REAL LEADS',
+          description: 'Контактная форма и Telegram-интеграция обеспечивают стабильный поток реальных заявок.',
+        },
+        {
+          number: '04',
+          title: 'PERFORMANCE',
+          description: 'Молниеносная загрузка, оптимизация под SEO и повышенное внимание к деталям UX.',
         },
       ],
-      guaranteeText: 'Наша гарантия: каждый сайт проходит аудит по более чем 40 пунктам производительности, мобильности и конверсии перед релизом.',
-      wcagTag: 'Стандарт WCAG 2.1 AA',
-      zeroSlopTag: 'Без шаблонных решений',
     },
     process: {
-      sectionTag: 'НАШ ПРОЦЕСС',
-      titlePart1: 'ОТ ИДЕИ',
-      titlePart2: 'ДО РЕЛИЗА.',
+      sectionTag: 'ЭТАПЫ И ПРОЦЕСС',
+      titlePart1: 'КАК МЫ',
+      titlePart2: 'РАБОТАЕМ?',
+      subtitle: 'От простой идеи до готового профессионального сайта — 4 понятных шага.',
+      ctaButton: 'НАЧАТЬ ПРОЕКТ',
       steps: [
         {
           step: '01',
-          title: 'ИССЛЕДОВАНИЕ',
-          description: 'Глубоко изучаем ваш бизнес, целевую аудиторию и задачи.',
-          details: [
-            'Детальная консультация и анализ конкурентной среды в Узбекистане и за рубежом',
-            'Определение портрета платежеспособного клиента и целей конверсии',
-            'Утверждение тональности бренда, эстетического вектора и функционала',
-          ],
+          title: 'ИНТЕРВЬЮ',
+          description: 'Сначала мы изучаем ваш бизнес, цели и необходимые функции.',
         },
         {
           step: '02',
           title: 'ДИЗАЙН',
-          description: 'Формируем визуальное направление и логику взаимодействия.',
-          details: [
-            'Архитектурные прототипы с выверенной типографической иерархией',
-            'Интерактивный визуал высокой точности с люксовой эстетикой и золотыми деталями',
-            'Согласование и совместная шлифовка концепции до написания первой строчки кода',
-          ],
+          description: 'Разрабатываем премиальную UI/UX концепцию под ваш бренд.',
         },
         {
           step: '03',
           title: 'РАЗРАБОТКА',
-          description: 'Создаем сайт на базе современного надежного стека.',
-          details: [
-            'Чистая реализация на React, TypeScript и современном CSS уровня Production',
-            'Плавные 60 FPS анимации, микро-взаимодействия и отклик за доли секунды',
-            'Бесшовная интеграция форм, систем бронирования и каналов связи',
-          ],
+          description: 'Создаем сайт на базе современных технологий быстро и качественно.',
         },
         {
           step: '04',
           title: 'ЗАПУСК',
-          description: 'Финально оптимизируем, тестируем и презентуем проект миру.',
-          details: [
-            'Комплексное тестирование на устройствах iPhone, Android, планшетах и ПК',
-            'Полная настройка SEO-тегов, максимальное ускорение и проверка безопасности',
-            'Подключение домена, развертывание на сервере и сдача проекта без простоя',
-          ],
+          description: 'Тестируем сайт, оптимизируем скорость и публикуем в сети.',
         },
       ],
-      estimatedTimelineLabel: 'СРОКИ РЕАЛИЗАЦИИ:',
-      estimatedTimelineText: 'Срок разработки в студии составляет от 1 до 3 недель в зависимости от выбранного тарифа.',
-      timelineTag: 'Прозрачные этапы · Прямые отчеты в Telegram',
     },
     about: {
       sectionTag: 'О СТУДИИ LUXWEB',
@@ -1624,67 +1654,110 @@ export const translations: Record<Language, TranslationData> = {
       ],
     },
     pricing: {
-      sectionTag: 'ИНВЕСТИЦИИ И ТАРИФЫ',
-      titlePart1: 'ПРОСТО. ПРОЗРАЧНО.',
-      titlePart2: 'ПРЕМИАЛЬНО.',
+      sectionTag: 'ПАКЕТЫ И ТАРИФЫ',
+      titlePart1: 'ПАКЕТЫ',
+      titlePart2: 'ВЕБ-САЙТОВ',
+      subtitle: 'Выберите подходящее решение для вашего бизнеса.',
       currencyLabel: 'Валюта:',
-      mostPopularBadge: 'САМЫЙ ПОПУЛЯРНЫЙ',
+      mostPopularBadge: 'РЕКОМЕНДУЕТСЯ',
       includesLabel: 'Включает в себя:',
-      disclaimer: 'Итоговая стоимость зависит от сложности проекта и персональных требований.',
+      disclaimer: '* Указанные цены являются ориентировочными. Итоговая стоимость определяется точными требованиями и объемом функционала.',
       plans: [
         {
           id: 'starter',
           name: 'STARTER',
-          priceUsd: 100,
-          priceUzs: '1,280,000',
-          description: 'Для малого бизнеса, которому необходимо уверенное присутствие в сети.',
-          turnaroundTime: 'Срок сдачи: 5 — 7 дней',
+          priceDisplay: 'от $150',
+          priceUsd: 150,
+          priceUzs: 'от 1,920,000',
+          description: 'Для новых бизнесов и небольших проектов.',
+          turnaroundTime: 'Готовность за 3–5 дней',
           features: [
-            'Адаптивный сайт для всех экранов',
-            'Премиальный современный дизайн',
-            'Раздел контактов и форма заявки',
-            'Базовые микро-анимации',
-            'Оптимизация под мобильные телефоны',
-            'Настройка домена и хостинга',
-            'Базовая конфигурация SEO-тегов',
+            'Современный Landing page',
+            'Адаптивный Responsive дизайн',
+            'Интеграция с Telegram',
+            'Контактная форма',
+            'Базовое SEO',
+            'Готовность за 3–5 дней',
           ],
-          ctaText: 'Выбрать тариф Starter',
+          ctaText: 'ОФОРМИТЬ ЗАКАЗ',
         },
         {
           id: 'business',
           name: 'BUSINESS',
-          priceUsd: 200,
-          priceUzs: '2,560,000',
-          description: 'Для компаний, которым нужен полноценный презентабельный сайт.',
-          turnaroundTime: 'Срок сдачи: 10 — 14 дней',
+          priceDisplay: 'от $250',
+          priceUsd: 250,
+          priceUzs: 'от 3,200,000',
+          description: 'Для компаний, желающих профессионально презентовать услуги.',
+          turnaroundTime: 'Готовность за 5–7 дней',
           features: [
-            'Все возможности тарифа Starter',
-            'Несколько разделов / страниц',
-            'Продвинутая плавная анимация',
-            'Галерея / витрина портфолио',
-            'Форма обратной связи с валидацией',
-            'Маршрутизация лидов в Telegram',
-            'Базовая SEO-оптимизация и индексация Google',
+            'Профессиональный многосекционный сайт',
+            'Адаптивный Responsive дизайн',
+            'Telegram lead система',
+            'Премиальный UI/UX',
+            'SEO-оптимизация',
+            'Интеграция с Google Maps / Instagram',
+            'Готовность за 5–7 дней',
           ],
-          ctaText: 'Выбрать тариф Business',
+          ctaText: 'ОФОРМИТЬ ЗАКАЗ',
         },
         {
           id: 'premium',
           name: 'PREMIUM',
-          priceUsd: 350,
-          priceUzs: '4,480,000',
-          description: 'Для бизнеса, которому требуется полностью индивидуальный цифровой опыт.',
-          turnaroundTime: 'Срок сдачи: 14 — 21 день',
+          priceDisplay: 'от $400',
+          priceUsd: 400,
+          priceUzs: 'от 5,120,000',
+          description: 'Для премиальных брендов с сильным онлайн-присутствием.',
+          turnaroundTime: 'Готовность за 7–14 дней',
           features: [
-            'Все возможности тарифа Business',
-            'Сложные взаимодействия и микро-детали',
-            'Эксклюзивная авторская UI/UX архитектура',
-            'Премиальные анимации и сглаженные переходы',
-            'Спецразделы (Лукбук, Меню, Характеристики)',
-            'Интерактивная онлайн-запись / бронирование',
-            'Приоритетная поддержка и ведение после запуска',
+            'Эксклюзивный кастомный веб-сайт',
+            'Продвинутый UI/UX',
+            'Продвинутые анимации',
+            'Telegram lead система',
+            'Комплексное SEO',
+            'Интеграция с соцсетями',
+            'Кастомные блоки и разделы',
+            'Оптимизация производительности',
+            'Готовность за 7–14 дней',
           ],
-          ctaText: 'Начать проект Premium',
+          ctaText: 'НАЧАТЬ PREMIUM ПРОЕКТ',
+        },
+      ],
+    },
+    faq: {
+      sectionTag: 'ВОПРОСЫ И ОТВЕТЫ',
+      titlePart1: 'ЧАСТО ЗАДАВАЕМЫЕ',
+      titlePart2: 'ВОПРОСЫ',
+      subtitle: 'Главные ответы о сотрудничестве с LUXWEB.',
+      items: [
+        {
+          id: 'faq-1',
+          question: 'Сколько времени занимает создание сайта?',
+          answer: 'В зависимости от объема проекта разработка обычно занимает от 3 до 14 дней. Точный срок утверждается в начале проекта.',
+        },
+        {
+          id: 'faq-2',
+          question: 'Какова стоимость создания сайта?',
+          answer: 'Стоимость сайтов начинается от $150. Итоговая цена зависит от дизайна, необходимого функционала и масштаба проекта.',
+        },
+        {
+          id: 'faq-3',
+          question: 'Будет ли сайт работать на смартфонах?',
+          answer: 'Да. Все сайты идеально адаптируются под экраны смартфонов, планшетов и персональных компьютеров.',
+        },
+        {
+          id: 'faq-4',
+          question: 'Можно ли подключить Telegram к сайту?',
+          answer: 'Да. Мы подключаем систему, при которой все заявки из контактной формы сайта мгновенно приходят прямо в ваш Telegram.',
+        },
+        {
+          id: 'faq-5',
+          question: 'Можно ли будет обновлять сайт в будущем?',
+          answer: 'Да. В дальнейшем на сайт можно легко добавлять новые разделы, функции, тексты и любые изменения.',
+        },
+        {
+          id: 'faq-6',
+          question: 'Как связаться с LUXWEB?',
+          answer: 'Заполните контактную форму на сайте. Ваше обращение сразу же поступит в Telegram-систему LUXWEB.',
         },
       ],
     },

@@ -1,11 +1,32 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import dotenv from 'dotenv';
+import { defineConfig, type Plugin } from 'vite';
+import handler from './api/contact';
+
+dotenv.config();
+
+function contactApiDevPlugin(): Plugin {
+  return {
+    name: 'contact-api-dev-server',
+    configureServer(server) {
+      server.middlewares.use('/api/contact', async (req: any, res: any) => {
+        try {
+          await handler(req, res);
+        } catch (err: any) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: false, error: err?.message || 'Server error' }));
+        }
+      });
+    },
+  };
+}
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), contactApiDevPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

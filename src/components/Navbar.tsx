@@ -28,6 +28,7 @@ export function Navbar({ onOpenProjectForm }: NavbarProps) {
     { label: t.nav.process, href: '#process' },
     { label: t.nav.about, href: '#about' },
     { label: t.nav.pricing, href: '#pricing' },
+    { label: t.nav.faq, href: '#faq' },
     { label: t.nav.contact, href: '#contact' },
   ];
 

@@ -28,6 +28,7 @@ export function Contact({ initialProjectType, initialBudget }: ContactProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialProjectType) {
@@ -63,20 +64,50 @@ export function Contact({ initialProjectType, initialBudget }: ContactProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setSubmitError(null);
+
     if (!validate()) return;
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      let data: any = null;
+      const text = await response.text();
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        if (text.includes('<!DOCTYPE') || text.includes('<html')) {
+          throw new Error('API server bilan bog‘lanishda xatolik (/api/contact HTML qaytardi).');
+        }
+        throw new Error(`Server javobida xatolik (${response.status})`);
+      }
+
+      if (!response.ok || !data?.success) {
+        throw new Error(data?.error || `Xatolik (${response.status}): Xabar yuborilmadi.`);
+      }
+
       setIsSubmitted(true);
-    }, 600);
+    } catch (err: any) {
+      setSubmitError(err?.message || 'Xabar yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko‘ring.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setSubmitError(null);
     setFormData({
       name: '',
       business: '',
@@ -116,9 +147,12 @@ export function Contact({ initialProjectType, initialBudget }: ContactProps) {
                 <div className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37] flex items-center justify-center mx-auto mb-6">
                   <CheckCircle2 className="w-8 h-8 text-[#D4AF37]" />
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mb-3">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mb-2">
                   {t.contact.success.title}
                 </h3>
+                <p className="text-emerald-400 font-mono text-xs tracking-wider mb-4">
+                  ● Xabaringiz qabul qilindi. Tez orada siz bilan bog‘lanamiz.
+                </p>
                 <p className="text-zinc-400 text-sm sm:text-base max-w-md mx-auto mb-8 font-light leading-relaxed">
                   {t.contact.success.greeting} <span className="text-white font-medium">{formData.name}</span>. {t.contact.success.thankYou}
                 </p>
@@ -321,6 +355,17 @@ export function Contact({ initialProjectType, initialBudget }: ContactProps) {
                     </p>
                   )}
                 </div>
+
+                {/* Error Banner */}
+                {submitError && (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono flex items-start gap-3 animate-in fade-in">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                    <div className="flex-1 leading-relaxed">
+                      <span className="text-red-200 font-semibold uppercase tracking-wider block mb-0.5">Xatolik:</span>
+                      {submitError}
+                    </div>
+                  </div>
+                )}
 
                 {/* Submit Button */}
                 <button

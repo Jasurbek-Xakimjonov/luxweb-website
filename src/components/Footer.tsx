@@ -55,6 +55,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#faq" className="text-zinc-400 hover:text-white transition-colors">
+                  {t.nav.faq}
+                </a>
+              </li>
+              <li>
                 <a href="#contact" className="text-zinc-400 hover:text-white transition-colors">
                   {t.nav.contact}
                 </a>

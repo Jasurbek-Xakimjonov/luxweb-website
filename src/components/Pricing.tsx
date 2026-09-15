@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Sparkles, ArrowRight } from 'lucide-react';
+import { Check, Sparkles, ArrowRight, Clock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface PricingProps {
@@ -7,7 +7,7 @@ interface PricingProps {
 }
 
 export function Pricing({ onSelectPlan }: PricingProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [currency, setCurrency] = useState<'USD' | 'UZS'>('USD');
 
   return (
@@ -24,9 +24,11 @@ export function Pricing({ onSelectPlan }: PricingProps) {
             </div>
 
             <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[1.08]">
-              {t.pricing.titlePart1} <br className="hidden sm:inline" />
-              <span className="text-zinc-400">{t.pricing.titlePart2}</span>
+              {t.pricing.titlePart1} <span className="text-zinc-400">{t.pricing.titlePart2}</span>
             </h2>
+            <p className="mt-4 text-base sm:text-lg text-zinc-400 font-light max-w-2xl leading-relaxed">
+              {t.pricing.subtitle}
+            </p>
           </div>
 
           {/* Currency Toggle */}
@@ -66,14 +68,14 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                 id={`pricing-card-${plan.id}`}
                 className={`relative rounded-2xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
                   isPopular
-                    ? 'bg-[#111117] border-2 border-[#D4AF37]/80 shadow-2xl shadow-black/80 lg:-translate-y-2'
-                    : 'bg-[#0d0d12] border border-white/[0.08] hover:border-white/20'
+                    ? 'bg-[#111116] border-2 border-[#D4AF37] shadow-2xl shadow-black/80 lg:-translate-y-2 hover:border-[#E5C388]'
+                    : 'bg-[#0c0c10] border border-white/[0.08] hover:border-white/20'
                 }`}
               >
-                {/* Most Popular Badge */}
+                {/* Recommended Badge */}
                 {isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#D4AF37] text-black text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 shadow-md">
-                    <Sparkles className="w-3 h-3 text-black" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#D4AF37] text-black text-[11px] font-bold uppercase tracking-widest flex items-center gap-1.5 shadow-md">
+                    <Sparkles className="w-3.5 h-3.5 text-black" />
                     <span>{t.pricing.mostPopularBadge}</span>
                   </div>
                 )}
@@ -84,35 +86,40 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                     <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-white mb-2">
                       {plan.name}
                     </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                    <p className="text-xs text-zinc-400 leading-relaxed font-light min-h-[36px]">
                       {plan.description}
                     </p>
                   </div>
 
-                  {/* Price display */}
-                  <div className="mb-8 pb-8 border-b border-white/[0.08]">
-                    <div className="flex items-baseline gap-2">
+                  {/* Price display - clearly showing starting from */}
+                  <div className="mb-8 pb-7 border-b border-white/[0.08]">
+                    <div className="flex items-baseline gap-2 flex-wrap">
                       <span className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight">
-                        {currency === 'USD' ? `$${plan.priceUsd}+` : `${plan.priceUzs}+`}
+                        {currency === 'USD' ? `$${plan.priceUsd}` : plan.priceUzs.split(' ')[0]}
                       </span>
-                      <span className="text-xs font-mono text-zinc-500 uppercase">
-                        {currency === 'USD' ? 'USD' : 'UZS'}
+                      <span className="text-sm font-mono text-[#D4AF37] font-semibold">
+                        {currency === 'USD' 
+                          ? (lang === 'uz' ? 'dan' : lang === 'ru' ? 'от' : 'starting from')
+                          : (lang === 'uz' ? "so'm dan" : lang === 'ru' ? "сум от" : "UZS from")}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-[#E5C388] mt-2 block">
-                      {plan.turnaroundTime}
-                    </span>
+
+                    {/* Turnaround Time badge */}
+                    <div className="mt-3 flex items-center gap-1.5 text-xs font-mono text-zinc-400">
+                      <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      <span>{plan.turnaroundTime}</span>
+                    </div>
                   </div>
 
                   {/* Feature Checklist */}
-                  <div className="space-y-3 mb-10">
+                  <div className="space-y-3.5 mb-10">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-3">
                       {t.pricing.includesLabel}:
                     </span>
                     {plan.features.map((feature) => (
                       <div key={feature} className="flex items-start gap-3 text-sm text-zinc-300">
                         <Check className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                        <span className="font-light">{feature}</span>
+                        <span className="font-light leading-snug">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -122,9 +129,9 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                 <button
                   id={`choose-${plan.id}-btn`}
                   onClick={() => onSelectPlan(plan.name)}
-                  className={`w-full py-4 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
+                  className={`w-full py-4 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] active:scale-[0.98] ${
                     isPopular
-                      ? 'bg-white hover:bg-[#D4AF37] text-black shadow-lg shadow-black/40'
+                      ? 'bg-[#D4AF37] hover:bg-[#E5C388] text-black shadow-lg shadow-[#D4AF37]/20 font-extrabold'
                       : 'bg-white/5 hover:bg-white/10 text-white border border-white/15 hover:border-[#D4AF37]/50'
                   }`}
                 >
@@ -136,9 +143,9 @@ export function Pricing({ onSelectPlan }: PricingProps) {
           })}
         </div>
 
-        {/* Small Required Note from Prompt */}
-        <div className="mt-12 text-center">
-          <p className="text-xs sm:text-sm font-mono text-zinc-400 max-w-xl mx-auto">
+        {/* Small Required Note */}
+        <div className="mt-14 text-center">
+          <p className="text-xs sm:text-sm font-mono text-zinc-400 max-w-xl mx-auto leading-relaxed">
             {t.pricing.disclaimer}
           </p>
         </div>
@@ -146,3 +153,4 @@ export function Pricing({ onSelectPlan }: PricingProps) {
     </section>
   );
 }
+
